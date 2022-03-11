@@ -2,6 +2,7 @@
 #include <graphql_ws/socket.hpp>
 
 #include <cassert>
+#include <sstream>
 #include <stdexcept>
 
 #include <ixwebsocket/IXWebSocketMessageType.h>
