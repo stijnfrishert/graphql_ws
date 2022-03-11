@@ -1,0 +1,240 @@
+# if, after an open bracket (of any type), arguments
+# do not fit a single line, break them per line and
+# align them at the same position
+AlignAfterOpenBracket: Align
+
+# defining an array of structures (e.g. an
+# std::array<std::pair<..., ...>, ..., align
+# the fields on the left-most option
+# disabled: this crashes clang-format on some files
+# https://bugs.llvm.org/show_bug.cgi?id=51935
+# AlignArrayOfStructures: Left
+
+# consecutive assignments and declarations should be
+# aligned, even when there's empty lines in-between
+# (but not when there's comment-lines separating them)
+AlignConsecutiveAssignments: None
+AlignConsecutiveDeclarations: None
+
+# if we are escaping newlines, we should align the escape
+# character at the left-most option that is still aligned
+AlignEscapedNewlines: Right
+
+# multi-line operands (e.g. addition of two operands)
+# should align the operands horizontally
+AlignOperands: Align
+
+# comments trailing on the right of actual code should
+# be aligned horizontally, with a minimum of 3 spaces
+AlignTrailingComments: true
+SpacesBeforeTrailingComments: 3
+
+# if a function call doesn't fit on a single line, allow
+# taking just the arguments on a single line of their own
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+
+# we don't want short blocks to be condensed in a single line
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: false
+
+# we want the return type be in front of the
+# function declaration and not on its own line
+AlwaysBreakAfterReturnType: None
+
+# multi-line strings can start on the same line
+# they're declared, instead of on the next line
+AlwaysBreakBeforeMultilineStrings: false
+
+# a template <...> directory should get its own line
+AlwaysBreakTemplateDeclarations: Yes
+
+# function call arguments are either all on one line
+# or they all get their own line
+BinPackArguments: false
+BinPackParameters: false
+
+# what case do we want to insert newlines before
+# opening braces?
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: true
+  AfterClass: true
+  AfterEnum: true
+  AfterExternBlock: true
+  AfterFunction: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterNamespace: false
+  AfterControlStatement: Always
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeLambdaBody: false
+  BeforeWhile: true
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+
+# multiline operators should break _after_ the operator
+BreakBeforeBinaryOperators: None
+
+# c++20: concept declaration gets its own line
+BreakBeforeConceptDeclarations: true
+
+# newline break before the ? and : in ternary
+BreakBeforeTernaryOperators: true
+
+# initializer- and inheritance should have first
+# a newline and then the colon itself
+BreakConstructorInitializers: BeforeComma
+BreakInheritanceList: BeforeComma
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+
+# automatically break long string literals
+BreakStringLiterals: true
+ColumnLimit: 160
+
+# one extra tab indentation for the initializer list
+ConstructorInitializerIndentWidth: 4
+
+# continuing a statement on the next line gets extra indentation
+ContinuationIndentWidth: 4
+
+# don't format braced lists like function calls but with curly braces
+# and don't add a space before opening them
+Cpp11BracedListStyle: false
+SpaceBeforeCpp11BracedList: false
+
+# Unix systems use lf while Windows uses crlf. We want consistent lf line endings in the
+# repository. Since many Windows tools work directly with crlf, we need to make the working copy
+# be crlf. Git has the core.autocrlf configuration variable for this. We depend on that variable
+# in combination with line ending deriving to make these tools not complain while still
+# having consistent repository contents. Making use of Derive here makes clang-format see
+# that we're using crlf on windows, and use those if it needs to add lines. On Unix
+# we use core.autocrlf = input, and thus clang-format will detect lf and insert those.
+DeriveLineEnding: true
+UseCRLF: false
+
+# we always align pointer- and reference signs at the
+# right side of the type and not on the left of the name
+DerivePointerAlignment: false
+PointerAlignment: Left
+ReferenceAlignment: Left
+
+# we don't want to surround access access modifiers
+# with empty lines
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: Always
+
+# they don't get their own level of indentation
+AccessModifierOffset: -4
+IndentAccessModifiers: false
+
+# we don't want to indent switch case blocks
+# but we do want to indent the labels
+IndentCaseBlocks: false
+IndentCaseLabels: true
+
+# colons used in case statements don't
+# get an extra space before them
+SpaceBeforeCaseColon: false
+
+# extern blocks start indentation
+IndentExternBlock: Indent
+
+# preprocessor directives indent before
+# the hash (so the hash itself is indented)
+IndentPPDirectives: BeforeHash
+
+# c++20: don't indent requires clauses
+IndentRequires: false
+
+# indentation is 4 spaces
+IndentWidth: 4
+
+# only insert trailing commas for
+# multiline container literals
+InsertTrailingCommas: Wrapped
+
+# blocks don't start with empty lines
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+# align lambda body to the outer scope
+# and not to the scope of its signature
+LambdaBodyIndentation: Signature
+
+# everything in a namespace block
+# gets an extra level of indentation
+NamespaceIndentation: All
+
+# note: PackConstructorInitializers is documented for clang-format 13,
+# but is not available until 14, so we use the older options
+# PackConstructorInitializers: Never
+AllowAllConstructorInitializersOnNextLine: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+
+# we don't sort includes because our headers are sometimes
+# broken and a header include only works because another
+# header was previously included so we must keep the current
+# existing order instead
+SortIncludes: false
+SortUsingDeclarations: false
+
+# no spaces after ugly c-style casts and no spaces
+# for the ! (logical not)
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+
+# add a space between the template keyword and the
+# opening angle bracket, but no spaces inside the
+# brackets
+SpaceAfterTemplateKeyword: true
+SpacesInAngles: false
+
+# don't add extra spaces for * or & when using
+# const or volatile qualifications
+SpaceAroundPointerQualifiers: Default
+
+# an equals sign gets a space before
+SpaceBeforeAssignmentOperators: true
+
+# only put spaces before control statements
+# (if, while, for, etc...) but not before
+# a function call themselves
+SpaceBeforeParens: ControlStatements
+
+# for (x : y)
+SpaceBeforeRangeBasedForLoopColon: true
+
+# array access doesn't get a space before
+# or after the opening bracket
+SpaceBeforeSquareBrackets: false
+SpacesInSquareBrackets: false
+
+# empty blocks are truly empty
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+
+# c-style cases and conditionals don't
+# get spaces inside their braces
+SpacesInCStyleCastParentheses: false
+SpacesInConditionalStatement: false
+
+# again we want no extra spaces inside
+# the parentheses e.g. for function calls
+SpacesInParentheses: false
+
+# hope to up this to c++20 soon ;)
+Standard: c++17
+
+# we indent with tabs, but align with spaces
+# our editor should show a tab as 4 spaces wide
+UseTab: AlignWithSpaces
+TabWidth: 4
