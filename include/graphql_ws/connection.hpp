@@ -3,7 +3,7 @@
 #include <functional>
 
 namespace graphql_ws {
-	class Connection
+	class [[nodiscard]] Connection
 	{
 	public:
 		Connection() = default;
