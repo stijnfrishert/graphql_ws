@@ -132,25 +132,29 @@ namespace graphql_ws {
 			assert(msg.contains("id"));
 			assert(msg.contains("payload"));
 
+			const std::string& id = msg["id"].get<std::string>();
+			const nlohmann::json& payload = msg["payload"];
+
 			std::unique_lock<std::mutex> lock(callbacksMutex);
-			if (auto it = replyCallbacks.find(msg["id"].get<std::string>()); it != replyCallbacks.end())
-				it->second(msg["payload"]);
+			if (auto it = replyCallbacks.find(id); it != replyCallbacks.end())
+				it->second(payload);
 		}
 		else if (type == "error")
 		{
 			assert(msg.contains("id"));
-			assert(msg.contains("payload"));
+			const std::string& id = msg["id"].get<std::string>();
 
 			std::unique_lock<std::mutex> lock(callbacksMutex);
-			if (auto it = replyCallbacks.find(msg["id"].get<std::string>()); it != replyCallbacks.end())
+			if (auto it = replyCallbacks.find(id); it != replyCallbacks.end())
 				replyCallbacks.erase(it);
 		}
 		else if (type == "complete")
 		{
 			assert(msg.contains("id"));
+			const std::string& id = msg["id"].get<std::string>();
 
 			std::unique_lock<std::mutex> lock(callbacksMutex);
-			if (auto it = replyCallbacks.find(msg["id"].get<std::string>()); it != replyCallbacks.end())
+			if (auto it = replyCallbacks.find(id); it != replyCallbacks.end())
 				replyCallbacks.erase(it);
 		}
 		else
