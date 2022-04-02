@@ -1,5 +1,6 @@
 #pragma once
 
+#include <atomic>
 #include <cstdint>
 #include <functional>
 #include <future>
@@ -36,7 +37,7 @@ namespace graphql_ws {
 	private:
 		std::optional<std::promise<void>> ackReceived;
 		ix::WebSocket socket;
-		std::uint64_t nextUniqueId = 0;
+		std::atomic<std::uint64_t> nextUniqueId = 0;
 
 		std::mutex callbacksMutex;
 		std::unordered_map<std::string, std::function<void(const nlohmann::json&)>> replyCallbacks;
